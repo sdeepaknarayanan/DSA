@@ -27,30 +27,6 @@ struct node* getnode()
 	return temp;
 };
 
-void addnode(struct node* parent, int lr)
-{
-	struct node* temp = getnode();
-	if (lr)
-	{
-		parent->left = temp;
-	}
-	else
-	{
-		parent->right=temp;
-	}
-}
-
-int max(int a, int b)
-{
-	if(a>b)
-	{
-		return a;
-	}
-	else
-	{
-		return b;	
-	}	
-}
 void diameter(struct node* root)
 {	
 	struct node* v = root;
@@ -108,5 +84,7 @@ int main()
 	printf("The diameter of the tree is %d", dia + 1);
 	return 0;
 }
+
+// This is for a custom tree -- Will update with a very general function for inputting a tree! 
 
 
