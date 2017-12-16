@@ -127,6 +127,7 @@ int main()
 	{
 		printf("The existence of backedge says it all - Not a DAG :(\n");
 	}
+	return 0;
 }
 
 
