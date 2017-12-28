@@ -1,94 +1,77 @@
-// Adjacency List representation of a graph using pointers in C++ // 
-
+// Adjacency List for Undirected Graph // 
 
 #include<stdio.h>
 #include<stdlib.h>
 
 struct node
 {
-	int no;
+	int nno;
 	struct node* next;
 };
 
-struct rnode
-{
-	int n;
-	struct rnode* down;
-	struct node* child;
-};
 
-void adjacencylist(struct rnode* root)
+void addnode(struct node arr[], int d, int n)
 {
-	struct rnode* froot;
-	struct node* fhead;
-	int n;
-	printf("Enter the number of nodes in the graph: ");
-	scanf("%d",&n);
-	int i;
-	int d;
-	int v;
-	int j;
-	for(i=0;i<n;i++)
-	{	
-		struct node* head = NULL;
-		printf("\nEnter the degree of node number %d : ",i+1);
-		scanf("%d",&d);
-		printf("Enter the adjacent vertices\n");
-		
-		for(j=0;j<d;j++)
-		{	
-			scanf("%d",&v);
+	struct node* root = &arr[n-1];
+	struct node* track;
+	int i,j;
+	int nodd1;
+	for(i=0;i<d;i++)
+	{
+		printf("\nEnter the neighbour of vertex %d\n",n);
+		scanf("%d",&nodd1);   
+		if(i==0)
+		{
 			struct node* temp = new node;
 			temp->next = NULL;
-			temp->no=v;
-			if(head == NULL)
-			{
-				head = temp;
-				fhead = head;
-			}
-			else
-			{
-				head->next = temp;
-				head = temp;
-			}
-			if(j==0)
-			{
-				struct rnode* temp1 = new rnode;
-				temp1->child = head;
-				temp1->down=NULL;
-				temp1->n = i+1;
-				if(root == NULL)
-					{
-						root = temp1;
-						froot = root;
-					}
-				else
-					{
-						root->down = temp1;
-						root = temp1;
-					}
-					
-			}
+			temp->nno = nodd1;
+			root->next = temp;
+			root->nno = n;
+			track = temp;
 		}
-		
-	}
-	struct rnode* temp1 = froot;
-	while(temp1!=NULL)
-	{
-		struct node* temp = temp1->child;
-		while(temp!=NULL)
+		else
 		{
-			printf("The edge from vertex %d to vertex %d has been added... \n",temp1->n, temp->no);
-			temp=temp->next;
+			struct node* temp = new node;
+			temp->next = NULL;
+			temp->nno = nodd1;
+			track->next = temp;
+			track = temp;
 		}
-		temp1=temp1->down;
 	}
-	
 }
+
+void display(struct node arr[], int n)
+{
+	int i = 0;
+	while(i<n)
+	{
+		struct node* temp = &arr[i];
+		struct node* track = temp->next;
+		while(track!=NULL)
+		{
+			printf("Edge added from vertex %d to vertex %d \n", temp->nno, track->nno );
+			track = track->next;
+		}
+		i+=1;
+	}
+}
+
 
 int main()
 {
-	struct rnode* head = NULL;
-	adjacencylist(head);
+	int n;
+	int d;
+	printf("Enter the number of nodes in the graph :\n");
+	scanf("%d",&n);
+	struct node graph[n];
+	int i;
+	for(i=0;i<n;i++)
+	{
+		printf("\nEnter the degree of node %d:\n", i+1);
+		scanf("%d",&d);
+		addnode(graph,d,i+1);
+	}
+	display(graph,n);
 	return 0;
+	
 }
