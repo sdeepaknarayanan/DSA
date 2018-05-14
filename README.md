@@ -1,3 +1,1 @@
-# Algorithms
-
-This contains a bunch of Data Structures' Implementation and realted algorithms.
+Implementation of Data Structures and Algorithms in C and C++.
